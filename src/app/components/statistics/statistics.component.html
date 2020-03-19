@@ -1,0 +1,72 @@
+<h2 class="text-center mt-5 text-white display-5">Ukupno broj zaraženih u svijetu</h2>
+<div class="col-md-12 row mt-5 justify-content-between mx-auto">
+    <div class="card text-white bg-dark mb-3 col-md-3 pl-0 pr-0 mx-auto" style="max-width: 15rem;">
+        <div class="card-header">Slučajevi</div>
+        <div class="card-body">
+            <h4 class="card-title text-warning">{{allCases}}</h4>
+            <p class="card-text"></p>
+        </div>
+    </div>
+    <div class="card text-white bg-dark mb-3 col-md-3 pl-0 pr-0 mx-auto" style="max-width: 15rem;">
+        <div class="card-header">Oporavljeni</div>
+        <div class="card-body">
+            <h4 class="card-title text-success">{{allRecovered}}</h4>
+            <p class="card-text"></p>
+        </div>
+    </div>
+    <div class="card text-white bg-dark mb-3 col-md-3 pl-0 pr-0 mx-auto" style="max-width: 15rem;">
+        <div class="card-header">Preminuli</div>
+        <div class="card-body">
+            <h4 class="card-title text-danger">{{allDeaths}}</h4>
+            <p class="card-text"></p>
+        </div>
+    </div>
+</div>
+<h5 class="text-white text-center">Ažurirano u {{updateFormated | date: "H:mm"}}</h5>
+<div class="ng-autocomplete mx-auto col-md-6 col-12 mt-5">
+    <h2 class="text-center text-white display-5">Države koje imaju zaražene</h2>
+    <ng-autocomplete #myInput [data]="countries" [searchKeyword]="keyword" (selected)='selectEvent($event)'
+        (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate"
+        [initialValue]="country">
+    </ng-autocomplete>
+    <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item"></a>
+    </ng-template>
+</div>
+<div class="col-md-12 row mt-5 justify-content-between mx-auto">
+    <div class="card text-white bg-dark mb-3 col-md-3 pl-0 pr-0 mx-auto" style="max-width: 15rem;">
+        <div class="card-header">Slučajevi</div>
+        <div class="card-body">
+            <h4 class="card-title text-warning">{{cases}}</h4>
+            <p class="card-text" *ngIf="todayCases === 0">Nema novih slučaja</p>
+            <p class="card-text" *ngIf="todayCases >5 ">Danas {{todayCases}} slučaja</p>
+            <p class="card-text" *ngIf="todayCases <= 5 && todayCases > 1">Danas {{todayCases}} slučaja</p>
+            <p class="card-text" *ngIf="todayCases === 1">Danas {{todayCases}} slučaj</p>
+        </div>
+    </div>
+    <div class="card text-white bg-dark mb-3 col-md-3 pl-0 pr-0 mx-auto" style="max-width: 15rem;">
+        <div class="card-header">Aktivni slučajevi</div>
+        <div class="card-body">
+            <h4 class="card-title text-warning">{{activeCases}}</h4>
+            <p class="card-text"></p>
+        </div>
+    </div>
+    <div class="card text-white bg-dark mb-3 col-md-3 pl-0 pr-0 mx-auto" style="max-width: 15rem;">
+        <div class="card-header">Oporavljeni</div>
+        <div class="card-body">
+            <h4 class="card-title text-success">{{recovered}}</h4>
+            <p class="card-text"></p>
+        </div>
+    </div>
+    <div class="card text-white bg-dark mb-3 col-md-3 pl-0 pr-0 mx-auto" style="max-width: 15rem;">
+        <div class="card-header">Preminuli</div>
+        <div class="card-body">
+            <h4 class="card-title text-danger">{{deaths}}</h4>
+            <p class="card-text" *ngIf="todayDeaths === 0 && deaths === 0">Nema smrtnih slučajeva</p>
+            <p class="card-text" *ngIf="todayDeaths === 0 && deaths > 0">Nema novih smrtnih slučajeva</p>
+            <p class="card-text" *ngIf="todayDeaths <= 5 && todayDeaths > 1 && todayDeaths !== 0">Danas {{todayDeaths}} smrtnih slučajeva</p>
+            <p class="card-text" *ngIf="todayDeaths > 6">Danas {{todayDeaths}} smrtnih slučaja</p>
+            <p class="card-text" *ngIf="todayDeaths === 1">Danas {{todayDeaths}} smrtni slučaj</p>
+        </div>
+    </div>
+</div>
